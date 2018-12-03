@@ -26,8 +26,8 @@ pipeline {
 		            
                 echo 'Build'
                 SonarAnalysis()				
-                bat "\"${tool 'MSBuild'}\\msbuild.exe\" Code/mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
-                bat "\"${tool 'MSBuild'}\\msbuild.exe\" /t:Package Code/mvcToDoList/mvcToDoList/mvcToDoList.csproj"
+                bat "\"${tool 'MSBuild'}\\msbuild.exe\" mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
+                bat "\"${tool 'MSBuild'}\\msbuild.exe\" /t:Package mvcToDoList/mvcToDoList/mvcToDoList.csproj"
                 bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=fd694b39228020af0cadb527bfbc37d872f9f898"
               
             }
@@ -46,7 +46,7 @@ pipeline {
 		stage('nuget packaging') {
             steps {
                 echo 'nuget Packaging'
-								bat 'C:/jenkins/nuget.exe pack Code/mvcToDoList/mvcToDoList'
+								bat 'C:/jenkins/nuget.exe pack mvcToDoList/mvcToDoList'
             }
         }
 		
@@ -54,8 +54,8 @@ pipeline {
             steps {
                 echo 'Nuget publish & install'
 				//bat 'C:/jenkins/nuget.exe setapikey admin:AP4WwMhAP8FPbyppRfqqckxtXXZ -Source Artifactory'
-                bat 'C:/jenkins/nuget.exe push *.nupkg -source "C:/jenkins/Packages"'
-                bat 'C:/jenkins/nuget.exe install Viacom.Intranet.Asia -source "C:/jenkins/Packages" -OutputDirectory "C:/jenkins/Packages/Install"'
+                bat 'C:/jenkins/nuget.exe push *.nupkg -source "C:/jenkins/Todo/Packages"'
+                bat 'C:/jenkins/nuget.exe install Viacom.Intranet.Asia -source "C:/jenkins/Todo/Packages" -OutputDirectory "C:/jenkins/Todo/Packages/Install"'
 				            }
         }
 		
@@ -138,7 +138,7 @@ pipeline {
 {
  echo  "\u2600 **********Sonar analysis started*****************"
 withSonarQubeEnv("$SonarQubeEnv") {
-    bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" begin /key:todo /name:todo /v:1.0 /d:sonar.host.url=http://10.127.126.113:9000 /d:sonar.login=fd694b39228020af0cadb527bfbc37d872f9f898"
+    bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" begin /key:DevOps_1234 /name:Todo /v:1.0 /d:sonar.host.url=http://10.127.126.113:9000 /d:sonar.login=fd694b39228020af0cadb527bfbc37d872f9f898"
     }
 }
 
