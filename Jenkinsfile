@@ -1,4 +1,3 @@
-
 #!groovy
 
 SONAR_BRANCH='master'
@@ -103,8 +102,8 @@ pipeline {
     //        steps {
       //          echo 'Deployment Started'
 				//powershell './SPdeploymentscript.ps1'
-            }
-        }
+           // }
+       // }
 		
 			
 		
