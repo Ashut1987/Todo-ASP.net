@@ -25,10 +25,10 @@ pipeline {
 		     steps{
 		            
                 echo 'Build'
-                SonarAnalysis()				
+               // SonarAnalysis()				
                 bat "\"${tool 'MSBuild'}\\msbuild.exe\" mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
                 bat "\"${tool 'MSBuild'}\\msbuild.exe\" /t:Package mvcToDoList/mvcToDoList/mvcToDoList.csproj"
-                bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=6c0d6aae91d338cfcf6efacb0e0542b8b8603624"
+               // bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=6c0d6aae91d338cfcf6efacb0e0542b8b8603624"
               
             }
         }
