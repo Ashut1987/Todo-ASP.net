@@ -26,8 +26,8 @@ pipeline {
 		            
                 echo 'Build'
                // SonarAnalysis()				
-                bat "\"${tool '.net 4'} C:\\Program Files (x86)\\MSBuild\\12.0\\Bin\\MSBuild.exe mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
-                bat "\"${tool '.net 4'} C:\\Program Files (x86)\\MSBuild\\12.0\\Bin\\MSbuild.exe /t:Package mvcToDoList/mvcToDoList/mvcToDoList.csproj"
+                bat "\"${tool '.net 4'}C:\\Program Files (x86)\\MSBuild\\12.0\\Bin\\MSBuild.exe\" Build/mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
+                bat "\"${tool '.net 4'}C:\\Program Files (x86)\\MSBuild\\12.0\\Bin\\MSbuild.exe\" /t:Package Build/mvcToDoList/mvcToDoList/mvcToDoList.csproj"
                // bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=6c0d6aae91d338cfcf6efacb0e0542b8b8603624"
               
             }
