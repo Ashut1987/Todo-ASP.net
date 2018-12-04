@@ -2,7 +2,7 @@
 
 SONAR_BRANCH='master'
 SONAR_URL='http://10.127.126.113:9000'
-SonarQubeEnv ='sonarqube'
+SonarQubeEnv ='SonarScanner-Windows'
 
 pipeline {
     agent {  
@@ -28,7 +28,7 @@ pipeline {
                 SonarAnalysis()				
                 bat "\"${tool 'MSBuild'}\\msbuild.exe\" mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
                 bat "\"${tool 'MSBuild'}\\msbuild.exe\" /t:Package mvcToDoList/mvcToDoList/mvcToDoList.csproj"
-                bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=fd694b39228020af0cadb527bfbc37d872f9f898"
+                bat "\"${tool 'SonarScanner-Windows'}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=6c0d6aae91d338cfcf6efacb0e0542b8b8603624"
               
             }
         }
@@ -138,7 +138,7 @@ pipeline {
 {
  echo  "\u2600 **********Sonar analysis started*****************"
 withSonarQubeEnv("$SonarQubeEnv") {
-    bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" begin /key:DevOps_1234 /name:Todo /v:1.0 /d:sonar.host.url=http://10.127.126.113:9000 /d:sonar.login=fd694b39228020af0cadb527bfbc37d872f9f898"
+    bat "\"${tool 'SonarScanner-Windows'}\\SonarScanner.MSBuild.exe\" begin /key:DevOps_1234 /name:Todo /v:1.0 /d:sonar.host.url=http://10.127.126.113:9000 /d:sonar.login=fd694b39228020af0cadb527bfbc37d872f9f898"
     }
 }
 
