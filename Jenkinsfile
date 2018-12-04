@@ -26,8 +26,8 @@ pipeline {
 		            
                 echo 'Build'
                // SonarAnalysis()				
-                bat "\"${tool 'MSBuild'}\\msbuild.exe\" build/mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
-                bat "\"${tool 'MSBuild'}\\msbuild.exe\" /t:Package build/mvcToDoList/mvcToDoList/mvcToDoList.csproj"
+                bat "\"${tool 'MSBuild12'}\\msbuild.exe\" mvcToDoList/mvcToDoList.sln /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:VisualStudioVersion=15.0 /p:ProductVersion=1.0.0.${env.BUILD_NUMBER} /v:diag"
+                bat "\"${tool 'MSBuild12'}\\msbuild.exe\" /t:Package mvcToDoList/mvcToDoList/mvcToDoList.csproj"
                // bat "\"${tool 'sonarqube'}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=6c0d6aae91d338cfcf6efacb0e0542b8b8603624"
               
             }
@@ -46,7 +46,7 @@ pipeline {
 		stage('nuget packaging') {
             steps {
                 echo 'nuget Packaging'
-								bat 'C:/jenkins/nuget.exe pack build/mvcToDoList/mvcToDoList'
+								bat 'C:/jenkins/nuget.exe pack mvcToDoList/mvcToDoList'
             }
         }
 		
